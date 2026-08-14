@@ -38,3 +38,6 @@ button,input,select,textarea{-webkit-tap-highlight-color:transparent}
 .mode-chooser [data-set-mode]{transition:background .18s ease,color .18s ease,border-color .18s ease,box-shadow .18s ease}
 .mode-chooser [data-set-mode].selected-mode{background:#0f766e!important;color:#fff!important;border-color:#0f766e!important;box-shadow:0 0 0 3px rgba(15,118,110,.18)!important}
 .mode-chooser [data-set-mode]:not(.selected-mode){background:#fff!important;color:#344054!important;border-color:#cfd6de!important}
+
+/* Creator links remain reachable on mobile without taking much space */
+@media(max-width:900px){.creator{display:flex!important;flex-direction:row;justify-content:space-between;align-items:center;gap:8px;margin:7px 3px 0;padding:7px 5px 0;font-size:9px}.creator-links{flex-wrap:nowrap}.creator-links a{padding:3px 6px;font-size:9px}}

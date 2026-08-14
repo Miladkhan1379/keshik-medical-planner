@@ -21,6 +21,8 @@ jobs:
         run: npm run mobile:prepare
       - name: Create Android project
         run: npx cap add android
+      - name: Generate branded icons and splash
+        run: npx capacitor-assets generate --android
       - name: Sync Android
         run: npx cap sync android
       - name: Build debug APK

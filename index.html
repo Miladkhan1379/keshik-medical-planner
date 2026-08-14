@@ -27,9 +27,10 @@
       <button data-page="schedule">جدول کشیک</button>
       <button data-page="analysis">تحلیل و گزارش</button>
       <button data-page="help">راهنمای قدم‌به‌قدم</button>
+      <button data-page="extras">اکسترا</button>
       <button data-page="settings">تنظیمات و پشتیبان</button>
     </div>
-    <div class="creator">ایده و توسعه : میلاد شکاری 98</div>
+    <div class="creator"><span>ایده و توسعه: میلاد شکاری 98</span><span class="creator-links"><a href="https://github.com/Miladkhan1379/keshik-medical-planner" target="_blank" rel="noopener">GitHub</a><a href="https://t.me/Keshik_Planner" target="_blank" rel="noopener">Telegram</a></span></div>
   </aside>
 
   <main class="main">
@@ -193,10 +194,38 @@
       </tbody></table></div><div class="actions top-gap"><a class="btn primary link-btn" href="sample_people.xlsx" download>دانلود Excel نمونه فارسی</a></div></div>
     </section>
 
-    <section id="settings" class="section"><div class="panel mobile-only"><h3>نصب روی گوشی</h3><div class="notice">نسخه موبایل همان موتور کشیک‌یار را استفاده می‌کند و برای چیدن و تحلیل نیازی به سرور جدا ندارد.</div><div class="mobile-install-actions"><button class="btn primary hidden" id="installPwaBtn">نصب روی گوشی</button></div><div class="notice mobile-install-status" id="mobileInstallStatus">در حال بررسی امکان نصب…</div></div><div class="panel"><h3>پشتیبان‌گیری</h3><div class="actions"><button class="btn primary" id="backupBtn">دانلود فایل پشتیبان</button><label class="btn light file-btn">بازیابی پشتیبان<input type="file" id="restoreFile" accept=".json" hidden></label><button class="btn danger" id="resetBtn">پاک‌کردن کل داده‌ها</button></div></div><div class="panel"><h3>حریم داده</h3><div class="notice">اسامی، اولویت‌ها، ظرفیت روزها، تقویم و کشیک فقط روی همین مرورگر و همین کامپیوتر ذخیره می‌شوند. فقط دریافت آنلاین تعطیلات به اینترنت نیاز دارد.</div></div><div class="panel"><div class="notice"><b>کشیک‌یار پزشکی — نسخه ۱.۱</b><br>ایده و توسعه : میلاد شکاری 98</div></div></section>
+    <section id="extras" class="section">
+      <div class="panel">
+        <h3>اکسترا — قرعه رندم</h3>
+        <div class="notice">این قسمت از کشیک‌چینی جداست و هیچ چیزی در جدول کشیک، محدودیت‌ها یا امتیازها تغییر نمی‌دهد. قرعه فقط بین اسامی فعالی که دستی یا از Excel وارد کرده‌ای انجام می‌شود.</div>
+        <div id="randomDemoNote" class="notice top-gap hidden">الان هنوز اسامی نمونه داخل برنامه هستند؛ اگر قرعه واقعی می‌خواهی اول اسامی خودت را وارد کن.</div>
+      </div>
+      <div class="cards random-stats">
+        <div class="card"><div class="k">کل اسم‌های قابل قرعه</div><div class="n" id="randomTotal">0</div></div>
+        <div class="card"><div class="k">اسم‌های باقی‌مانده</div><div class="n" id="randomRemain">0</div></div>
+      </div>
+      <div class="panel random-panel">
+        <div class="random-winner" id="randomWinner"><span>برای شروع روی «قرعه کن» بزن.</span></div>
+        <div class="actions random-main-actions">
+          <button class="btn primary" id="randomDrawBtn">قرعه کن</button>
+          <button class="btn light" id="randomResetBtn">شروع دور جدید</button>
+        </div>
+        <div class="subpanel hidden" id="randomDecision">
+          <b>این اسم در قرعه‌های بعدی چه شود؟</b>
+          <div class="actions top-gap">
+            <button class="btn light" id="randomKeepBtn">در قرعه بماند</button>
+            <button class="btn danger" id="randomRemoveBtn">از ادامه خارج شود</button>
+          </div>
+          <div class="field-help">بعد از انتخاب یکی از این دو حالت، دکمه قرعه بعدی دوباره فعال می‌شود.</div>
+        </div>
+      </div>
+      <div class="panel"><h3>نتیجه قرعه‌ها</h3><div id="randomHistory" class="random-history"><div class="muted">هنوز قرعه‌ای انجام نشده.</div></div></div>
+    </section>
+
+    <section id="settings" class="section"><div class="panel mobile-only"><h3>نصب روی گوشی</h3><div class="notice">نسخه موبایل همان موتور کشیک‌یار را استفاده می‌کند و برای چیدن و تحلیل نیازی به سرور جدا ندارد.</div><div class="mobile-install-actions"><button class="btn primary hidden" id="installPwaBtn">نصب روی گوشی</button></div><div class="notice mobile-install-status" id="mobileInstallStatus">در حال بررسی امکان نصب…</div></div><div class="panel"><h3>پشتیبان‌گیری</h3><div class="actions"><button class="btn primary" id="backupBtn">دانلود فایل پشتیبان</button><label class="btn light file-btn">بازیابی پشتیبان<input type="file" id="restoreFile" accept=".json" hidden></label><button class="btn danger" id="resetBtn">پاک‌کردن کل داده‌ها</button></div></div><div class="panel"><h3>حریم داده</h3><div class="notice">اسامی، اولویت‌ها، ظرفیت روزها، تقویم و کشیک فقط روی همین مرورگر و همین کامپیوتر ذخیره می‌شوند. فقط دریافت آنلاین تعطیلات به اینترنت نیاز دارد.</div></div><div class="panel"><div class="notice"><b>کشیک‌یار پزشکی — نسخه ۱.۱</b><br>ایده و توسعه: میلاد شکاری 98<div class="app-links top-gap"><a class="btn light sm" href="https://github.com/Miladkhan1379/keshik-medical-planner" target="_blank" rel="noopener">GitHub پروژه</a><a class="btn light sm" href="https://t.me/Keshik_Planner" target="_blank" rel="noopener">کانال Telegram</a></div></div></div></section>
   </main>
 </div>
 <div class="toast" id="toast"></div>
-<script src="jalali.js"></script><script src="holidays.js"></script><script src="xlsx-lite.js"></script><script src="solver.js"></script><script src="app.js"></script><script src="v11-extra.js"></script><script src="mobile.js"></script>
+<script src="jalali.js"></script><script src="holidays.js"></script><script src="xlsx-lite.js"></script><script src="solver.js"></script><script src="app.js"></script><script src="v11-extra.js"></script><script src="extras.js"></script><script src="mobile.js"></script>
 </body>
 </html>

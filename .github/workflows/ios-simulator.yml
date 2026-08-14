@@ -15,6 +15,8 @@ jobs:
         run: npm run mobile:prepare
       - name: Create iOS project
         run: npx cap add ios
+      - name: Generate branded icons and splash
+        run: npx capacitor-assets generate --ios
       - name: Sync iOS
         run: npx cap sync ios
       - name: Build for iOS Simulator without signing
