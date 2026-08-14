@@ -1,0 +1,16 @@
+کشیک‌یار ۱.۱ — اصلاحات موبایل
+
+اصلاح شده:
+- خروجی Excel در APK اندروید
+- دانلود فایل پشتیبان در APK اندروید
+- دانلود فایل‌های نمونه در APK اندروید
+- قرار گرفتن فرد جدید زیر نوار بالای موبایل
+- مشخص شدن حالت فعال ساده/پیشرفته با رنگ
+
+نحوه اعمال:
+۱) فایل‌های Patch را داخل پوشه Clone شده GitHub کپی و Replace کن.
+۲) GitHub Desktop > Commit to main > Push origin.
+۳) GitHub > Actions > Android APK > Run workflow.
+۴) APK جدید را از Artifacts بگیر و نسخه قبلی را با آن جایگزین کن.
+
+package.json تغییر کرده و افزونه‌های رسمی Filesystem و Share اضافه شده‌اند، پس APK باید دوباره Build شود.

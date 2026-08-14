@@ -49,7 +49,17 @@ function load(){try{for(const key of ['keshikYarV11','keshikPlannerV1Milad98','k
 let state=load()||defaultState();
 function save(){localStorage.setItem('keshikYarV11',JSON.stringify(state));renderDashboard();}
 function toast(t){const x=$('#toast');x.textContent=t;x.classList.add('show');setTimeout(()=>x.classList.remove('show'),2400);}
-function download(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
+async function download(blob,name){
+  if(window.KeshikNativeSave && window.Capacitor?.isNativePlatform?.()){
+    try{await window.KeshikNativeSave(blob,name);return;}
+    catch(err){console.error('Native file save failed:',err);try{toast('ذخیره مستقیم انجام نشد؛ روش معمول را امتحان می‌کنیم');}catch(_e){}}
+  }
+  const a=document.createElement('a');
+  const url=URL.createObjectURL(blob);
+  a.href=url;a.download=name;a.style.display='none';
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),3000);
+}
 
 months.forEach((m,i)=>$('#jm').insertAdjacentHTML('beforeend',`<option value="${i+1}">${m}</option>`));
 week.forEach((w,i)=>$('#manualStartWeek').insertAdjacentHTML('beforeend',`<option value="${i}">${w}</option>`));
@@ -87,7 +97,7 @@ function renderGlobalPriorities(){const boxes=$$('[data-global-priorities]');con
 function relationBox(p,key,title){const selected=p[key]||[],others=state.people.filter(x=>x.id!==p.id);return `<div class="relation-box" data-relbox="${key}"><div class="rel-title">${title}</div><div class="chips">${selected.map(id=>{const q=state.people.find(x=>x.id===id);return q?`<span class="chip">${escHtml(q.name||'بدون نام')} <button type="button" data-remove-rel="${id}">×</button></span>`:'';}).join('')||'<span class="muted">کسی انتخاب نشده</span>'}</div><details><summary class="muted">انتخاب افراد</summary><div class="pick-list">${others.map(q=>`<label><input type="checkbox" data-rel="${key}" value="${q.id}" ${selected.includes(q.id)?'checked':''}> ${escHtml(q.name||'بدون نام')}</label>`).join('')||'<span class="muted">ابتدا فرد دیگری اضافه کن</span>'}</div></details></div>`;}
 function shiftPicker(p){const selected=p.allowedShiftIds||[];return `<div class="relation-box"><div class="rel-title">بخش‌های مجاز <span class="muted">(خالی = همه)</span></div><div class="chips">${selected.map(id=>{const s=state.shifts.find(x=>x.id===id);return s?`<span class="chip">${escHtml(s.name)} <button type="button" data-remove-shift="${id}">×</button></span>`:'';}).join('')||'<span class="muted">همه بخش‌ها مجازند</span>'}</div><details><summary class="muted">انتخاب بخش‌ها</summary><div class="pick-list">${state.shifts.map(s=>`<label><input type="checkbox" data-shiftpick value="${s.id}" ${selected.includes(s.id)?'checked':''}> ${escHtml(s.name)}</label>`).join('')}</div></details></div>`;}
 function priorityBox(p){const items=[['unavailable','روز ممنوع'],['preferred','روز ترجیحی'],['together','جفت'],['avoid','جفت‌نشدن'],['morning','مورنینگ']];return `<div class="priority-box"><div class="rel-title">تنظیم مخصوص این فرد</div>${items.map(([k,t])=>`<div class="priority-row"><b>${t}</b><select data-weight="${k}">${weightOptions(p.ruleWeights?.[k],true,clampWeight(state.globalRuleWeights?.[k]??DEFAULT_WEIGHTS[k]))}</select></div>`).join('')}</div>`;}
-function addPerson(p={}){state.seededDemo=false;state.people.unshift(newPerson(p));state.assignments=[];save();renderPeople();requestAnimationFrame(()=>{const card=$('#peopleCards .person-card');card?.scrollIntoView({behavior:'smooth',block:'start'});card?.querySelector('[data-k="name"]')?.focus();});}
+function addPerson(p={}){state.seededDemo=false;state.people.unshift(newPerson(p));state.assignments=[];save();renderPeople();requestAnimationFrame(()=>{const card=$('#peopleCards .person-card');if(card){const sticky=document.querySelector('.sidebar');const offset=(window.innerWidth<=900?(sticky?.getBoundingClientRect().height||110)+14:18);const top=card.getBoundingClientRect().top+window.scrollY-offset;window.scrollTo({top:Math.max(0,top),behavior:'smooth'});setTimeout(()=>card.querySelector('[data-k="name"]')?.focus({preventScroll:true}),260);}});}
 $('#addPerson').onclick=()=>addPerson();
 $('#clearPeople').onclick=()=>{if(confirm('همه اسامی پاک شوند؟')){state.people=[];state.assignments=[];state.seededDemo=false;selectedPeople.clear();save();renderPeople();}};
 $('#addDemo').onclick=()=>{if(state.people.length&&!confirm('لیست فعلی با اسامی نمونه جایگزین شود؟'))return;state.people=fantasyPeople();state.assignments=[];state.seededDemo=true;selectedPeople.clear();save();renderPeople();};

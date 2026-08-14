@@ -1,6 +1,6 @@
 {
   "name": "keshikyar-mobile",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": true,
   "description": "KeshikYar mobile wrapper for Android and iOS",
   "scripts": {
@@ -12,7 +12,9 @@
     "mobile:open:ios": "npm run mobile:prepare && npx cap sync ios && npx cap open ios"
   },
   "dependencies": {
-    "@capacitor/core": "^8.0.0"
+    "@capacitor/core": "^8.0.0",
+    "@capacitor/filesystem": "latest-8",
+    "@capacitor/share": "latest-8"
   },
   "devDependencies": {
     "@capacitor/android": "^8.0.0",

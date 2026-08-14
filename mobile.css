@@ -32,3 +32,9 @@ button,input,select,textarea{-webkit-tap-highlight-color:transparent}
   .mode-card{padding:14px}.mode-card b{font-size:15px}
 }
 @media(display-mode:standalone){.pwa-browser-only{display:none!important}}
+
+/* Hotfix mobile 1.1 */
+@media(max-width:900px){.person-card{scroll-margin-top:calc(125px + var(--safe-top));}}
+.mode-chooser [data-set-mode]{transition:background .18s ease,color .18s ease,border-color .18s ease,box-shadow .18s ease}
+.mode-chooser [data-set-mode].selected-mode{background:#0f766e!important;color:#fff!important;border-color:#0f766e!important;box-shadow:0 0 0 3px rgba(15,118,110,.18)!important}
+.mode-chooser [data-set-mode]:not(.selected-mode){background:#fff!important;color:#344054!important;border-color:#cfd6de!important}
