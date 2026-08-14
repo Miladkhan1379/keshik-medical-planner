@@ -1,0 +1,26 @@
+name: iOS Simulator Build
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: npm install
+      - name: Prepare web files
+        run: npm run mobile:prepare
+      - name: Create iOS project
+        run: npx cap add ios
+      - name: Sync iOS
+        run: npx cap sync ios
+      - name: Build for iOS Simulator without signing
+        run: |
+          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug -sdk iphonesimulator -derivedDataPath build-ios CODE_SIGNING_ALLOWED=NO build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: KeshikYar-iOS-Simulator
+          path: build-ios/Build/Products/Debug-iphonesimulator/App.app
