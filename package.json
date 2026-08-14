@@ -12,14 +12,14 @@
     "mobile:open:ios": "npm run mobile:prepare && npx cap sync ios && npx cap open ios"
   },
   "dependencies": {
-    "@capacitor/core": "^8.0.0",
-    "@capacitor/filesystem": "latest-8",
-    "@capacitor/share": "latest-8"
+    "@capacitor/core": "8.5.0",
+    "@capacitor/filesystem": "8.1.2",
+    "@capacitor/share": "8.0.1"
   },
   "devDependencies": {
-    "@capacitor/android": "^8.0.0",
-    "@capacitor/cli": "^8.0.0",
-    "@capacitor/ios": "^8.0.0",
-    "@capacitor/assets": "latest"
+    "@capacitor/android": "8.5.0",
+    "@capacitor/cli": "8.5.0",
+    "@capacitor/ios": "8.5.0",
+    "@capacitor/assets": "3.0.5"
   }
 }
