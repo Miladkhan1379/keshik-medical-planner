@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>کشیک‌یار پزشکی | نسخه 1.1</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="mobile.css">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="theme-color" content="#0f766e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#0f766e">
 </head>
@@ -188,10 +193,10 @@
       </tbody></table></div><div class="actions top-gap"><a class="btn primary link-btn" href="sample_people.xlsx" download>دانلود Excel نمونه فارسی</a></div></div>
     </section>
 
-    <section id="settings" class="section"><div class="panel"><h3>پشتیبان‌گیری</h3><div class="actions"><button class="btn primary" id="backupBtn">دانلود فایل پشتیبان</button><label class="btn light file-btn">بازیابی پشتیبان<input type="file" id="restoreFile" accept=".json" hidden></label><button class="btn danger" id="resetBtn">پاک‌کردن کل داده‌ها</button></div></div><div class="panel"><h3>حریم داده</h3><div class="notice">اسامی، اولویت‌ها، ظرفیت روزها، تقویم و کشیک فقط روی همین مرورگر و همین کامپیوتر ذخیره می‌شوند. فقط دریافت آنلاین تعطیلات به اینترنت نیاز دارد.</div></div><div class="panel"><div class="notice"><b>کشیک‌یار پزشکی — نسخه ۱.۱</b><br>ایده و توسعه : میلاد شکاری 98</div></div></section>
+    <section id="settings" class="section"><div class="panel mobile-only"><h3>نصب روی گوشی</h3><div class="notice">نسخه موبایل همان موتور کشیک‌یار را استفاده می‌کند و برای چیدن و تحلیل نیازی به سرور جدا ندارد.</div><div class="mobile-install-actions"><button class="btn primary hidden" id="installPwaBtn">نصب روی گوشی</button></div><div class="notice mobile-install-status" id="mobileInstallStatus">در حال بررسی امکان نصب…</div></div><div class="panel"><h3>پشتیبان‌گیری</h3><div class="actions"><button class="btn primary" id="backupBtn">دانلود فایل پشتیبان</button><label class="btn light file-btn">بازیابی پشتیبان<input type="file" id="restoreFile" accept=".json" hidden></label><button class="btn danger" id="resetBtn">پاک‌کردن کل داده‌ها</button></div></div><div class="panel"><h3>حریم داده</h3><div class="notice">اسامی، اولویت‌ها، ظرفیت روزها، تقویم و کشیک فقط روی همین مرورگر و همین کامپیوتر ذخیره می‌شوند. فقط دریافت آنلاین تعطیلات به اینترنت نیاز دارد.</div></div><div class="panel"><div class="notice"><b>کشیک‌یار پزشکی — نسخه ۱.۱</b><br>ایده و توسعه : میلاد شکاری 98</div></div></section>
   </main>
 </div>
 <div class="toast" id="toast"></div>
-<script src="jalali.js"></script><script src="holidays.js"></script><script src="xlsx-lite.js"></script><script src="solver.js"></script><script src="app.js"></script><script src="v11-extra.js"></script>
+<script src="jalali.js"></script><script src="holidays.js"></script><script src="xlsx-lite.js"></script><script src="solver.js"></script><script src="app.js"></script><script src="v11-extra.js"></script><script src="mobile.js"></script>
 </body>
 </html>

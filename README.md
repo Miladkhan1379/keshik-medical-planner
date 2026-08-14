@@ -68,3 +68,14 @@
 ## توسعه
 
 ایده و توسعه: **میلاد شکاری 98**
+
+## Android و iOS
+نسخه 1.1 برای موبایل هم آماده شده است. ساده‌ترین روش استفاده PWA از طریق GitHub Pages است. برای بسته Native نیز تنظیمات Capacitor داخل مخزن قرار دارد.
+
+- Android: PWA یا ساخت APK/AAB با Capacitor و Android Studio
+- iOS: PWA یا ساخت Native با Capacitor و Xcode
+- راهنمای کامل: `MOBILE_FA.md`
+- Workflow آماده Android: `.github/workflows/android-apk.yml`
+- Workflow تست iOS Simulator: `.github/workflows/ios-simulator.yml`
+
+هسته چیدمان بین Windows، Web، Android و iOS مشترک است و جداگانه بازنویسی نشده است.

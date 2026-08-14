@@ -10,3 +10,11 @@ backups/
 
 # فایل‌های خروجی واقعی کشیک
 outputs/
+
+# Capacitor generated/build files
+node_modules/
+www/
+android/.gradle/
+android/app/build/
+ios/App/DerivedData/
+build-ios/

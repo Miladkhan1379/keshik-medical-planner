@@ -1,0 +1,34 @@
+/* Mobile refinements for KeshikYar 1.1 */
+:root{--safe-top:env(safe-area-inset-top,0px);--safe-right:env(safe-area-inset-right,0px);--safe-bottom:env(safe-area-inset-bottom,0px);--safe-left:env(safe-area-inset-left,0px)}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overscroll-behavior-y:none;padding-bottom:var(--safe-bottom)}
+button,input,select,textarea{-webkit-tap-highlight-color:transparent}
+.mobile-only{display:none!important}
+.mobile-install-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.mobile-install-status{margin-top:10px}
+@media(max-width:900px){
+  .sidebar{position:sticky;top:0;z-index:80;padding:calc(8px + var(--safe-top)) 8px 8px;height:auto;box-shadow:0 4px 18px rgba(16,24,40,.15)}
+  .brand{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 6px 8px;margin:0 0 7px}
+  .brand h1{font-size:16px;margin:0}.brand small{font-size:10px}.creator{display:none}
+  .nav{display:flex;gap:4px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;padding-bottom:2px}
+  .nav::-webkit-scrollbar{display:none}.nav button{min-width:112px;padding:10px 8px;margin:0;font-size:12px;white-space:nowrap}
+  .main{padding:10px max(10px,var(--safe-right)) calc(16px + var(--safe-bottom)) max(10px,var(--safe-left))}
+  .topbar{margin-bottom:10px}.title h2{font-size:19px}.title p{font-size:11px;line-height:1.7}
+  .panel{border-radius:13px;padding:13px;margin-bottom:11px}.panel h3{font-size:15px}
+  .btn{min-height:44px;padding:10px 13px}.field input,.field select,.field textarea{min-height:44px;font-size:16px}
+  .choice-chip{min-height:42px}
+  .table-wrap,.schedule-grid{-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+  .schedule-grid{max-height:62vh}
+  .day{min-height:88px}.day-grid{gap:6px}
+  .mobile-only{display:block!important}
+}
+@media(max-width:600px){
+  .actions>.btn,.actions>label.btn{flex:1 1 auto}
+  .cards{gap:8px}.card{padding:12px}.card .n{font-size:20px}
+  .day-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .day{min-height:78px}
+  .person-card{border-radius:12px}.person-head,.person-details{padding:11px}
+  .notice{font-size:11px;line-height:1.9}
+  .mode-card{padding:14px}.mode-card b{font-size:15px}
+}
+@media(display-mode:standalone){.pwa-browser-only{display:none!important}}
