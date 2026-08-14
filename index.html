@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>کشیک‌یار پزشکی | نسخه 1.1</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0f766e">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><h1>کشیک‌یار پزشکی</h1><small>کشیک‌یار پزشکی · نسخه ۱.۱</small></div>
+    <div class="nav">
+      <button data-page="dashboard" class="active">داشبورد</button>
+      <button data-page="import">ورود از Excel</button>
+      <button data-page="people">اسامی و محدودیت‌ها</button>
+      <button data-page="shifts">بخش‌ها و ظرفیت</button>
+      <button data-page="calendar">ماه، تعطیلات و روزها</button>
+      <button data-page="generate">چیدمان خودکار</button>
+      <button data-page="schedule">جدول کشیک</button>
+      <button data-page="analysis">تحلیل و گزارش</button>
+      <button data-page="help">راهنمای قدم‌به‌قدم</button>
+      <button data-page="settings">تنظیمات و پشتیبان</button>
+    </div>
+    <div class="creator">ایده و توسعه : میلاد شکاری 98</div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="title"><h2 id="pageTitle">داشبورد</h2><p id="pageSub">چیدمان و تحلیل روی همین کامپیوتر انجام می‌شود.</p></div>
+      <span class="badge">موتور چیدمان: آفلاین</span>
+    </div>
+
+    <section id="dashboard" class="section active">
+      <div class="panel mode-chooser">
+        <h3>اول بگو چقدر تنظیمات لازم داری</h3>
+        <div class="notice">اگر فقط روزهای ممنوع و جفت‌ها برایت مهم‌اند، «ساده» را بزن. اگر بخش‌های مختلف، مورنینگ، کاور، تعطیلات و تنظیمات دقیق‌تر می‌خواهی، «پیشرفته» را انتخاب کن. هر وقت خواستی می‌توانی حالت را عوض کنی.</div>
+        <div class="actions top-gap"><button class="btn primary" data-set-mode="simple">حالت ساده</button><button class="btn light" data-set-mode="advanced">حالت پیشرفته</button><span class="badge" id="modeBadge">ساده</span></div>
+      </div>
+      <div class="cards">
+        <div class="card"><div class="k">افراد فعال</div><div class="n" id="dashPeople">0</div></div>
+        <div class="card"><div class="k">روزهای ماه</div><div class="n" id="dashDays">31</div></div>
+        <div class="card"><div class="k">جایگاه‌های واقعی ماه</div><div class="n" id="dashSlots">0</div></div>
+        <div class="card"><div class="k">وضعیت برنامه</div><div class="n small-n" id="dashStatus">هنوز چیده نشده</div></div>
+      </div>
+      <div class="panel"><h3>جریان کار پیشنهادی</h3><div class="steps" id="workflowSteps"><span>۱. Excel</span><span>۲. اسامی و اولویت‌ها</span><span>۳. بخش‌ها</span><span>۴. تقویم و ظرفیت روزها</span><span>۵. چیدمان</span><span>۶. تحلیل</span><span>۷. Excel خروجی</span></div></div>
+      <div class="panel"><h3>قوانین اصلی</h3><div class="actions"><span class="pill gold">۴۸ی</span><span class="pill gold">عدم تکرار در روز</span><span class="pill gold">روز ممنوع</span><span class="pill gold">روز ترجیحی</span><span class="pill gold">جفت</span><span class="pill gold">جفت نشدن</span><span class="pill gold">مورنینگ بخش + روز</span><span class="pill gold">ظرفیت متفاوت هر روز</span><span class="pill gold">اولویت ۰ تا ۱۰۰</span></div></div>
+      <div class="panel"><div class="notice"><b>۴۸ی:</b> تیک خاموش یعنی فرد نباید در دو روز متوالی کشیک داشته باشد. تیک روشن یعنی این حالت برای او مجاز است. پیش‌فرض فرد جدید خاموش است.</div></div>
+    </section>
+
+    <section id="import" class="section">
+      <div class="panel">
+        <h3>ورود اسامی از Excel — روش پیشنهادی شروع</h3>
+        <div class="notice import-guide"><b>پیشنهاد:</b> از فایل Excel نمونه استفاده کن تا فارسی بدون به‌هم‌ریختگی وارد شود. ردیف اول عنوان ستون‌هاست و از ردیف دوم هر فرد یک ردیف دارد. ترتیب ستون‌ها اجباری نیست؛ بعد از انتخاب فایل، مشخص می‌کنی هر ستون چه معنی دارد.</div>
+        <div class="actions top-gap"><a class="btn primary link-btn" href="sample_people.xlsx" download>دانلود Excel نمونه فارسی</a><button class="btn light" data-page-jump="help">آموزش کامل ورود Excel</button></div>
+        <div class="subpanel top-gap"><b>ستون‌های اصلی نمونه:</b><br>A نام · B تعداد کشیک · C تعداد کشیک تعطیل · D اجازه ۴۸ی · E روزهای ممنوع · F روزهای ترجیحی · G جفت با · H جفت نشدن/نباشد با · I مورنینگ ماه‌های قبل · J شیفت‌های مجاز · K حداکثر روز متوالی · L کشیک ماه‌های قبل · M کشیک تعطیل ماه‌های قبل. ستون‌های بعدی فقط برای شخصی‌سازی اولویت پنج قانون هستند؛ خالی یعنی استفاده از تنظیم کلی. مقدار ۱۰۰ خودش خط قرمز/خط قرمز است و ستون جداگانه‌ای برای خط قرمز وجود ندارد.</div>
+        <div class="field top-gap"><label>۱) فایل Excel را انتخاب کن</label><input type="file" id="importFile" accept=".xlsx,.csv"></div>
+        <div id="mappingBox" class="hidden top-gap">
+          <div class="notice">۲) مشخص کن هر ستون چیست. اگر ستونی در فایل نداری، «انتخاب نشده» بگذار. ستون «نام» اجباری است.</div>
+          <div class="grid g4 mapping-grid top-gap">
+            <div class="field"><label>نام *</label><select id="mapName"></select></div>
+            <div class="field"><label>تعداد کشیک</label><select id="mapTarget"></select></div>
+            <div class="field"><label>تعداد کشیک تعطیل</label><select id="mapHoliday"></select></div>
+            <div class="field"><label>اجازه ۴۸ی</label><select id="mapAllow48"></select></div>
+            <div class="field"><label>روزهای ممنوع</label><select id="mapUnavailable"></select></div>
+            <div class="field"><label>روزهای ترجیحی</label><select id="mapPreferred"></select></div>
+            <div class="field"><label>جفت با</label><select id="mapTogether"></select></div>
+            <div class="field"><label>جفت نشدن / نباشد با</label><select id="mapAvoid"></select></div>
+            <div class="field" data-advanced-field><label>از تاریخ / شروع حضور</label><select id="mapStartDay"></select></div>
+            <div class="field" data-advanced-field><label>تا تاریخ / پایان حضور</label><select id="mapEndDay"></select></div>
+            <div class="field"><label>مورنینگ ماه‌های قبل</label><select id="mapPrevMorning"></select></div>
+            <div class="field"><label>شیفت‌های مجاز</label><select id="mapAllowedShifts"></select></div>
+            <div class="field"><label>حداکثر روز متوالی</label><select id="mapMaxConsecutive"></select></div>
+            <div class="field"><label>کشیک ماه‌های قبل</label><select id="mapPrevShifts"></select></div>
+            <div class="field"><label>کشیک تعطیل ماه‌های قبل</label><select id="mapPrevHolidays"></select></div>
+            <div class="field"><label>اولویت محدودیت روز</label><select id="mapWUnavailable"></select></div>
+            
+            <div class="field"><label>اولویت روز ترجیحی</label><select id="mapWPreferred"></select></div>
+            
+            <div class="field"><label>اولویت جفت</label><select id="mapWTogether"></select></div>
+            
+            <div class="field"><label>اولویت جفت نشدن</label><select id="mapWAvoid"></select></div>
+            
+            <div class="field"><label>اولویت مورنینگ</label><select id="mapWMorning"></select></div>
+            
+          </div>
+          <div class="actions top-gap"><button class="btn primary" id="doImport">۳) وارد کردن اسامی</button></div>
+          <div id="preview" class="import-preview table-wrap top-gap"></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>تحلیل یک Excel کشیک آماده</h3>
+        <div class="notice">اگر برنامه کشیک را قبلاً در Excel چیده‌ای، فایل را بده. خودت مشخص می‌کنی هر ستون چه معنی دارد و چه چیزهایی بررسی شوند. لازم نیست قالب فایل دقیقاً مثل نمونه ما باشد.</div>
+        <div class="actions top-gap"><a class="btn light link-btn" href="sample_schedule.xlsx" download>دانلود Excel نمونه برای تحلیل</a></div>
+        <div class="field top-gap"><label>فایل کشیک آماده</label><input type="file" id="analysisExcelFile" accept=".xlsx"></div>
+        <div id="analysisExcelSetup" class="hidden top-gap">
+          <div class="notice">برای هر ستون مشخص کن «تاریخ است»، «تعطیل است»، «ستون کشیک است» یا اصلاً لازم نیست تحلیل شود.</div>
+          <div id="analysisColumnMap" class="table-wrap top-gap"></div>
+          <div class="subpanel top-gap"><b>چه چیزهایی بررسی شوند؟</b><div id="analysisChoices" class="actions top-gap"></div></div>
+          <div class="actions top-gap"><button class="btn primary" id="runExcelAnalysis">تحلیل فایل</button><button class="btn light" id="exportExcelAnalysis" disabled>خروجی Excel تحلیل</button></div>
+          <div id="analysisExcelPreview" class="table-wrap top-gap"></div>
+          <div id="externalAnalysisResult" class="table-wrap top-gap"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="people" class="section">
+      <div class="panel toolbar sticky-tools">
+        <div class="actions"><button class="btn primary" id="addPerson">+ افزودن فرد</button><button class="btn light" id="addDemo">اسامی فانتزی نمونه</button><button class="btn light" id="selectAllPeople">انتخاب همه</button><button class="btn light" id="clearSelection">لغو انتخاب</button><button class="btn danger" id="deleteSelected">حذف انتخاب‌شده‌ها</button><button class="btn danger ghost" id="clearPeople">حذف همه</button></div>
+        <div class="muted" id="selectionCount">۰ نفر انتخاب شده</div>
+      </div>
+      <div class="panel"><h3>اول تنظیم کلی برای همه</h3><div class="notice">این پنج مقدار پیش‌فرض همه افراد هستند. ۱۰۰ همان خط قرمز/خط قرمز است. بعد از این تنظیم، فقط افراد استثنا را در کارت‌های پایین شخصی‌سازی کن.</div><div data-global-priorities class="grid g3 top-gap"></div></div>
+      <div class="notice panel-note"><b>اولویت شخصی:</b> ابتدا در صفحه «چیدمان» وزن کلی پنج قانون را تعیین کن. هر فرد به‌طور پیش‌فرض همان تنظیم کلی را می‌گیرد. فقط اگر لازم بود، داخل کارت فرد مقدار خاص انتخاب کن. مقیاس واحد است: ۰ نادیده، ۲۵ کم، ۵۰ متوسط، ۷۵ زیاد و <b>۱۰۰ = خط قرمز / خط قرمز</b>.</div>
+      <div id="peopleCards" class="people-cards"></div>
+    </section>
+
+    <section id="shifts" class="section">
+      <div class="panel"><div class="actions"><button class="btn primary" id="addShift">+ افزودن بخش/شیفت</button><button class="btn light" id="defaultShifts">قالب پزشکی نمونه</button></div></div>
+      <div class="panel"><div class="table-wrap"><table class="shift-table"><thead><tr><th>نام بخش/شیفت</th><th>نفر اصلی</th><th>کاور</th><th>نوع</th><th>احتمال مورنینگ</th><th>از تاریخ</th><th>تا تاریخ</th><th></th></tr></thead><tbody id="shiftBody"></tbody></table></div><div class="footer-note">ظرفیت این جدول «پیش‌فرض» است. اگر مثلاً روز ۲۴ به‌جای ۲ نفر، ۳ نفر لازم باشد، در صفحه «ماه، تعطیلات و روزها» همان روز را انتخاب و ظرفیت روز ۲۴ را تغییر بده.</div></div>
+      <div class="panel"><h3>مورنینگ بر اساس روز هفته</h3><div class="notice">اگر یک بخش در بعضی روزهای هفته مورنینگ ندارد، اینجا یک‌بار مشخصش کن. تنظیم یک روز خاص در تقویم از این جدول اولویت بالاتری دارد.</div><div id="weeklyMorningGrid" class="table-wrap top-gap"></div></div>
+    </section>
+
+    <section id="calendar" class="section">
+      <div class="panel">
+        <h3>بازه‌ای که می‌خواهی کشیک بچینی</h3>
+        <div class="grid g4">
+          <div class="field"><label>نوع بازه</label><select id="rangeMode"><option value="month">یک ماه کامل</option><option value="custom">بازه دلخواه، حتی بین دو ماه</option></select></div>
+          <div class="field"><label>جمعه‌ها تعطیل حساب شوند</label><select id="fridaysHoliday"><option value="1">بله</option><option value="0">خیر</option></select></div>
+          <div class="field" data-simple-only><label>چند نفر هر روز کشیک باشند؟</label><input id="simpleDailyPeople" type="number" min="1" max="30" value="2"></div>
+          <div class="field" data-advanced-only><label>حالت تقویم تک‌ماه</label><select id="calendarMode"><option value="jalali">شمسی خودکار</option><option value="manual">تعریف دستی ماه</option></select></div>
+        </div>
+        <div id="singleMonthRange" class="subpanel top-gap"><div class="grid g3"><div class="field"><label>سال شمسی</label><input id="jy" type="number" value="1405"></div><div class="field"><label>ماه</label><select id="jm"></select></div><div class="field"><label>راهنما</label><div class="muted">برای بخشی از همین ماه هم می‌توانی حالت «بازه دلخواه» را انتخاب کنی.</div></div></div></div>
+        <div id="customDateRange" class="subpanel top-gap hidden"><div class="grid g3">
+          <div class="field"><label>از تاریخ</label><div class="date-triple"><input id="rangeStartY" type="number" placeholder="سال"><select id="rangeStartM"></select><input id="rangeStartD" type="number" min="1" max="31" placeholder="روز"></div></div>
+          <div class="field"><label>تا تاریخ</label><div class="date-triple"><input id="rangeEndY" type="number" placeholder="سال"><select id="rangeEndM"></select><input id="rangeEndD" type="number" min="1" max="31" placeholder="روز"></div></div>
+          <div class="field"><label>اعمال</label><button class="btn primary" id="applyDateRange">اعمال بازه</button><div class="field-help">مثلاً ۱۴۰۵/۰۶/۲۰ تا ۱۴۰۵/۰۷/۱۵. حداکثر ۹۳ روز.</div></div>
+        </div>
+        <div id="manualCalendarBox" class="subpanel hidden"><div class="grid g3"><div class="field"><label>تعداد روز ماه</label><input id="manualDays" type="number" min="28" max="31" value="31"></div><div class="field"><label>روز هفته‌ی روز اول ماه</label><select id="manualStartWeek"></select></div><div class="field"><label>تعطیلات دستی</label><input id="manualHolidayDays" placeholder="مثال: 3, 7, 14, 21"></div></div><div class="actions"><button class="btn light" id="applyManualCalendar">اعمال تنظیم دستی</button></div></div>
+        <div class="hidden"><input id="periodStart" value="1"><input id="periodEnd" value="31"></div>
+      </div>
+      <div class="panel"><h3>دریافت تعطیلات از منبع ایرانی</h3><div class="grid g3"><div class="field"><label>منبع</label><select id="holidaySource"><option value="pnldev">PNLdev</option><option value="persianapi">Persian Calendar API</option></select></div><div class="field"><label>دریافت اینترنتی</label><button class="btn primary" id="fetchHolidays">دریافت تعطیلات همین ماه</button></div><div class="field"><label>نسخه داخلی ۱۴۰۵</label><button class="btn light" id="loadOfficial">بارگذاری داده داخلی ۱۴۰۵</button></div></div><div class="actions top-gap"><label class="btn light file-btn">ورود فایل تعطیلات JSON/CSV<input id="holidayFile" type="file" accept=".json,.csv" hidden></label><button class="btn light" id="clearHolidays">پاک کردن تعطیلات دستی/دریافتی</button></div><div class="notice top-gap" id="holidayStatus">چیدمان آفلاین است؛ فقط دریافت آنلاین تعطیلات اینترنت می‌خواهد.</div></div>
+      <div class="panel"><div class="notice"><b>روی یک روز کلیک کن.</b> پایین تقویم می‌توانی همان روز را تعطیل کنی، «احتمال مورنینگ روز» را روشن کنی و ظرفیت هر بخش را فقط برای همان روز تغییر بدهی.</div><div id="calendarGrid" class="day-grid top-gap"></div></div>
+      <div class="panel" id="dayEditor"><h3>تنظیم روز انتخاب‌شده</h3><div class="notice">یک روز از تقویم بالا انتخاب کن.</div></div>
+    </section>
+
+    <section id="generate" class="section">
+      <div class="panel"><h3>۱) اولویت کلی قوانین</h3><div class="notice">این تنظیم یک‌بار برای کل ماه مشخص می‌شود و پیش‌فرض همه افراد است. مقیاس واحد است: <b>۰ نادیده</b>، ۲۵ کم، ۵۰ متوسط، ۷۵ زیاد و <b>۱۰۰ = خط قرمز / خط قرمز</b>. اگر برای فردی وضعیت متفاوتی داری، در کارت همان فرد «اولویت شخصی» تعیین کن.</div><div data-global-priorities class="grid g3 top-gap"></div><div class="footer-note">مثال پیشنهادی: محدودیت روز = ۱۰۰، روز ترجیحی = ۵۰، جفت = ۷۵، جفت نشدن = ۵۰، مورنینگ = ۵۰. این‌ها فقط پیش‌فرض هستند و قابل تغییرند.</div></div>
+      <div class="panel"><h3>۲) چیدمان خودکار</h3><div class="grid g2"><div class="field"><label>تعداد تلاش الگوریتم</label><select id="runs"><option>12</option><option selected>28</option><option>40</option><option>60</option><option>80</option></select><div class="field-help">هر «تلاش» یک شروع متفاوت است. ۱۲ سریع، ۲۸ مناسب اغلب ماه‌ها، و ۴۰ تا ۸۰ برای محدودیت‌های سنگین‌تر است. تعداد بیشتر لزوماً نتیجه بهتر را تضمین نمی‌کند، ولی شانس پیدا کردن چیدمان کم‌جریمه‌تر را بالا می‌برد.</div></div><div class="field"><label>اجرا</label><button class="btn primary" id="solveBtn">شروع چیدمان</button></div></div><div class="top-gap"><div class="progress"><div id="solveProgress"></div></div><div class="muted" id="solveText">آماده</div></div></div>
+      <div class="panel"><h3>ابزارهای اختیاری بعد از چیدمان</h3><div class="notice">این‌ها پیش‌فرض خاموش‌اند تا صفحه شلوغ نشود. فقط هرکدام را لازم داری روشن کن.</div><div class="grid g3 top-gap"><label class="choice-chip"><input type="checkbox" id="toolManualEdit"> ویرایش دستی جدول و هشدار زنده</label><label class="choice-chip"><input type="checkbox" id="toolLocking"> قفل کردن خانه‌ها برای چیدمان دوباره</label><label class="choice-chip"><input type="checkbox" id="toolExplainEmpty"> توضیح اینکه چرا یک خانه خالی مانده</label></div></div>
+      <div class="panel"><h3>اولویت و جریمه چگونه کار می‌کند؟</h3><div class="notice">دیگر خط قرمز و امتیاز دو گزینه جدا نیستند. <b>خود عدد تعیین‌کننده است:</b> ۰ تا ۷۵ قانون قابل انعطاف است و ۱۰۰ همان قانون خط قرمز/خط قرمز است. مثلاً «محدودیت روز = ۱۰۰» یعنی الگوریتم اجازه کشیک در آن روز را نمی‌دهد؛ «جفت نشدن = ۲۵» یعنی بهتر است رعایت شود ولی در شرایط سخت قابل نقض است. <b>جریمه نهایی هرچه کمتر باشد بهتر است.</b></div></div>
+      <div class="panel"><h3>قوانین ثابت و اجباری</h3><div class="notice">عدم تکرار یک فرد در همان روز، قانون ۴۸ی برای فردی که اجازه ندارد، شیفت‌های مجاز و سقف روزهای متوالی همچنان ثابت‌اند. قوانین روز ممنوع، روز ترجیحی، جفت، جفت نشدن و مورنینگ را خودت برای هر فرد درجه‌بندی می‌کنی.</div></div>
+    </section>
+
+    <section id="schedule" class="section"><div class="panel"><div class="actions"><button class="btn primary" id="exportSchedule">خروجی Excel</button><button class="btn light" id="reanalyze">تحلیل مجدد</button></div><div id="scheduleWarnings" class="notice top-gap hidden"></div></div><div class="panel"><div id="scheduleTable" class="schedule-grid"></div></div><div class="panel hidden" id="slotExplainPanel"><h3>چرا این خانه خالی مانده؟</h3><div id="slotExplainBox" class="notice"></div></div></section>
+
+    <section id="analysis" class="section">
+      <div class="cards"><div class="card"><div class="k">خانه خالی</div><div class="n" id="anEmpty">0</div></div><div class="card"><div class="k">افراد با خطای خط قرمز</div><div class="n" id="anHard">0</div></div><div class="card"><div class="k">افراد نیازمند بهبود</div><div class="n" id="anSoft">0</div></div><div class="card"><div class="k">جریمه الگوریتم — کمتر بهتر</div><div class="n" id="anScore">-</div></div></div>
+      <div class="panel"><div class="notice">مورنینگ این ماه حالا دو منبع دارد: <b>مورنینگ بخش</b> و <b>مورنینگ روز تقویم</b>. اگر یک کشیک هم در بخش دارای احتمال مورنینگ باشد و هم روزش در تقویم مورنینگ علامت خورده باشد، دو امتیاز مورنینگ در تحلیل ثبت می‌شود تا هر دو ریسک دیده شوند.</div></div>
+      <div class="panel"><div class="actions"><button class="btn primary" id="exportAnalysis">Excel کامل: کشیک + تحلیل</button></div></div><div class="panel"><div id="analysisTable" class="table-wrap"></div></div>
+    </section>
+
+    <section id="help" class="section">
+      <div class="panel"><h3>راهنمای کامل و قدم‌به‌قدم</h3><ol class="guide-list">
+        <li><b>Excel نمونه را دانلود کن.</b> برای فارسی، Excel پیشنهاد می‌شود و CSV لازم نیست.</li>
+        <li><b>هر فرد یک ردیف.</b> نام، تعداد کشیک و تعداد کشیک تعطیل را وارد کن. روزها را مثل <code>3,7,12-15</code> بنویس.</li>
+        <li><b>اجازه ۴۸ی:</b> صفر/خالی یعنی ممنوع و 1 یعنی مجاز.</li>
+        <li><b>ورود Excel:</b> فایل را انتخاب و مشخص کن هر ستون چیست. فیلدهایی که در Excel نداری روی «انتخاب نشده» بمانند.</li>
+        <li><b>اسامی و محدودیت‌ها:</b> کارت هر فرد را باز کن. جفت و جفت‌نشدن را از لیست انتخاب کن. شیفت‌های مجاز هم انتخابی هستند.</li>
+        <li><b>اولویت کلی:</b> قبل از چیدمان، برای پنج عامل ۰، ۲۵، ۵۰، ۷۵ یا ۱۰۰ انتخاب کن. ۱۰۰ خودش خط قرمز/خط قرمز است و گزینه جدا ندارد.</li><li><b>شخصی‌سازی:</b> هر فرد روی «پیش‌فرض کلی» است؛ فقط برای استثناها مقدار شخصی انتخاب کن.</li>
+        <li><b>روز ترجیحی = ۱۰۰:</b> اگر روز ترجیحی تعریف شده باشد، فرد فقط در همان روزها قرار می‌گیرد.</li>
+        <li><b>مورنینگ = ۱۰۰:</b> فرد در بخش یا روز دارای احتمال مورنینگ قرار نمی‌گیرد.</li>
+        <li><b>بخش‌ها:</b> ظرفیت پیش‌فرض هر روز را تعریف کن و «احتمال مورنینگ بخش» را برای بخش‌های لازم روشن کن.</li>
+        <li><b>تقویم:</b> سال و ماه را انتخاب کن. تعطیلات را آنلاین یا دستی وارد کن. سپس روی هر روز کلیک کن.</li>
+        <li><b>روز خاص:</b> در ویرایش روز می‌توانی تعطیل بودن، احتمال مورنینگ همان روز و ظرفیت هر بخش همان روز را تغییر دهی. خالی‌کردن ظرفیت ویژه یعنی بازگشت به ظرفیت پیش‌فرض بخش.</li>
+        <li><b>تعداد تلاش:</b> با ۲۸ شروع کن. برای برنامه‌های پیچیده‌تر ۴۰، ۶۰ یا ۸۰ را امتحان کن.</li>
+        <li><b>تحلیل:</b> ابتدا خانه خالی و خطای خط قرمز، سپس تعداد کشیک، تعطیل، جفت‌ها، محدودیت‌ها و سه ستون مورنینگ را بررسی کن.</li>
+        <li><b>بازه بین دو ماه:</b> در صفحه تاریخ‌ها «بازه دلخواه» را انتخاب کن و تاریخ شروع و پایان کامل بده؛ مثلاً ۲۰ شهریور تا ۱۵ مهر.</li>
+        <li><b>حضور بخشی از بازه:</b> برای هر فرد و هر بخش می‌توانی تاریخ شروع و پایان جدا تعیین کنی.</li>
+        <li><b>ابزارهای اختیاری:</b> اگر لازم داری، ویرایش دستی، قفل خانه‌ها یا توضیح خانه خالی را در صفحه چیدمان روشن کن.</li>
+        <li><b>قفل:</b> بعد از قفل کردن یک خانه، اگر دوباره «شروع چیدمان» را بزنی آن خانه دست‌نخورده می‌ماند و بقیه برنامه دور آن چیده می‌شود.</li>
+        <li><b>ویرایش دستی:</b> اسم یک خانه را عوض کن؛ برنامه همان لحظه می‌گوید خانه خالی یا خط قرمز جدید ساخته شده یا نه.</li>
+        <li><b>خروجی:</b> Excel کامل شامل جدول کشیک و تحلیل را دریافت کن و قبل از تغییر بزرگ یک فایل پشتیبان بگیر.</li>
+      </ol></div>
+      <div class="panel"><h3>ستون‌های Excel نمونه</h3><div class="table-wrap"><table><thead><tr><th>ستون</th><th>عنوان</th><th>نمونه</th></tr></thead><tbody>
+        <tr><td>A</td><td>نام</td><td>آرمان آذرخش</td></tr><tr><td>B</td><td>تعداد کشیک</td><td>7</td></tr><tr><td>C</td><td>تعداد کشیک تعطیل</td><td>1</td></tr><tr><td>D</td><td>اجازه ۴۸ی</td><td>0</td></tr><tr><td>E</td><td>روزهای ممنوع</td><td>3,7,12-14</td></tr><tr><td>F</td><td>روزهای ترجیحی</td><td>5,20</td></tr><tr><td>G</td><td>جفت با</td><td>نیلا شباهنگ</td></tr><tr><td>H</td><td>نباشد با</td><td>سام سپهرافزا</td></tr><tr><td>I</td><td>مورنینگ ماه‌های قبل</td><td>11</td></tr><tr><td>J</td><td>شیفت‌های مجاز</td><td>اورژانس مردان, داخلی ۱</td></tr><tr><td>K</td><td>حداکثر روز متوالی</td><td>0</td></tr><tr><td>L</td><td>کشیک ماه‌های قبل</td><td>7</td></tr><tr><td>M</td><td>کشیک تعطیل ماه‌های قبل</td><td>1</td></tr><tr><td>N تا R</td><td>اولویت شخصی ۵ عامل</td><td>خالی = پیش‌فرض کلی؛ 100 = خط قرمز</td></tr>
+      </tbody></table></div><div class="actions top-gap"><a class="btn primary link-btn" href="sample_people.xlsx" download>دانلود Excel نمونه فارسی</a></div></div>
+    </section>
+
+    <section id="settings" class="section"><div class="panel"><h3>پشتیبان‌گیری</h3><div class="actions"><button class="btn primary" id="backupBtn">دانلود فایل پشتیبان</button><label class="btn light file-btn">بازیابی پشتیبان<input type="file" id="restoreFile" accept=".json" hidden></label><button class="btn danger" id="resetBtn">پاک‌کردن کل داده‌ها</button></div></div><div class="panel"><h3>حریم داده</h3><div class="notice">اسامی، اولویت‌ها، ظرفیت روزها، تقویم و کشیک فقط روی همین مرورگر و همین کامپیوتر ذخیره می‌شوند. فقط دریافت آنلاین تعطیلات به اینترنت نیاز دارد.</div></div><div class="panel"><div class="notice"><b>کشیک‌یار پزشکی — نسخه ۱.۱</b><br>ایده و توسعه : میلاد شکاری 98</div></div></section>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+<script src="jalali.js"></script><script src="holidays.js"></script><script src="xlsx-lite.js"></script><script src="solver.js"></script><script src="app.js"></script><script src="v11-extra.js"></script>
+</body>
+</html>
